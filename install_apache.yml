@@ -1,0 +1,16 @@
+---
+- name: Install and start Apache on RHEL 10
+  hosts: 10.0.0.140 
+  become: yes
+  tasks:
+    - name: Install httpd package
+      ansible.builtin.dnf:
+        name: httpd
+        state: present
+
+    - name: Start and enable httpd service
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: yes
+
