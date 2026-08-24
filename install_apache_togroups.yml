@@ -31,6 +31,15 @@
         - https
       notify: Reload firewall
 
+    - name: Copy default html file for site
+      tags: apache
+      copy:
+        source: default_site.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: 0644
+
 - hosts: group1
   become: yes
   tasks:
