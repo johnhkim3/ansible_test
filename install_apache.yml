@@ -1,13 +1,13 @@
 ---
 - name: Install and start Apache on RHEL 10
-  hosts: 10.0.0.140 
+  hosts: all
   become: yes
   tasks:
     - name: Install httpd package
       ansible.builtin.dnf:
         name: httpd
         state: present
-      when: ansible_distribution == "RedHat"
+      when: ansible_distribution == "Redhat"
 
     - name: Start and enable httpd service
       ansible.builtin.service:
@@ -16,3 +16,10 @@
         enabled: yes
       when: ansible_distribution == "RedHat"
 
+    - name: Enable http service in firewalld
+      ansible.posix.firewalld:
+        service: http
+        state: enabled
+        permanent: true
+        immediate: true
+      when: ansible_distribution == "Redhat"
