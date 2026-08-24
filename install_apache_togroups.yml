@@ -28,11 +28,6 @@
         - https
       notify: Reload firewall
 
-  handlers:
-    - name: Reload firewall
-      ansible.builtin.firewalld:
-        state: reloaded
-
 - hosts: group1
   become: yes
   tasks:
