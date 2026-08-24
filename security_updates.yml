@@ -1,0 +1,22 @@
+---
+- name: Apply RHEL 10 Security Updates
+  hosts: rhel10_hosts
+  become: true
+  tasks:
+    - name: Refresh subscription and metadata, then install security updates
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
+        security: true
+        update_only: true
+        update_cache: true
+
+    - name: Check if a system reboot is required
+      ansible.builtin.command: needs-restarting -r
+      register: reboot_check
+      failed_when: reboot_check.rc == 2
+      changed_when: reboot_check.rc == 1
+
+    - name: Reboot the system if required by security patches
+      ansible.builtin.reboot:
+      when: reboot_check.rc == 1
