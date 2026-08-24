@@ -1,1 +1,34 @@
+---
 
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install apache package
+      package:
+        name:
+          - "{{ apache_package }}"
+        state: latest
+        update_cache: yes
+
+    - name: Start and enable httpd service
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: yes
+      when: ansible_distribution == "RedHat"
+
+    - name: Enable http service in firewalld
+      ansible.posix.firewalld:
+        service: http
+        state: enabled
+        permanent: true
+        immediate: true
+      when: ansible_distribution == "Redhat"
+
+- hosts: group1
+  become: yes
+  tasks:
+    - name: Ensure tmux is installed
+      package:
+        name: tmux
+        state: present
