@@ -35,7 +35,7 @@
   become: yes
   tasks:
     - name: Ensure tmux is installed
-      tags:tmux
+      tags: tmux
       package:
         name: tmux
         state: present
