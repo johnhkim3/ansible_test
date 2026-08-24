@@ -17,13 +17,20 @@
         enabled: yes
       when: ansible_distribution == "RedHat"
 
-    - name: Enable http service in firewalld
-      ansible.posix.firewalld:
-        service: http
-        state: enabled
+    - name: Allow HTTP and HTTPS permanently
+      ansible.builtin.firewalld:
+        service: "{{ item }}"
         permanent: true
-        immediate: true
-      when: ansible_distribution == "Redhat"
+        state: enabled
+      loop:
+        - http
+        - https
+      notify: Reload firewall
+
+  handlers:
+    - name: Reload firewall
+      ansible.builtin.firewalld:
+        state: reloaded
 
 - hosts: group1
   become: yes
