@@ -1,0 +1,9 @@
+---
+- name: Shut down all hosts
+  hosts: all
+  become: true
+  tasks:
+    - name: Initialize system shutdown
+      ansible.builtin.shutdown:
+        msg: "Shutting down via Ansible playbook"
+        delay: 5
