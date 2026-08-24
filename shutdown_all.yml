@@ -2,8 +2,15 @@
 - name: Shut down all hosts
   hosts: all
   become: true
+  gather_facts: false
   tasks:
-    - name: Initialize system shutdown
-      ansible.builtin.shutdown:
-        msg: "Shutting down via Ansible playbook"
-        delay: 5
+    - name: Send power off command
+      ansible.builtin.shell: "sleep 2 && shutdown -h now"
+      async: 10
+      poll: 0
+      ignore_unreachable: true
+
+    - name: Notify user
+      ansible.builtin.debug:
+        msg: "Shutdown signal sent to {{ inventory_hostname }}"
+
