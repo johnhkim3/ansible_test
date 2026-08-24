@@ -17,10 +17,11 @@
         enabled: yes
       when: ansible_distribution == "RedHat"
 
-    - name: Allow HTTP and HTTPS permanently
-      ansible.builtin.firewalld:
+    - name: Allow HTTP and HTTPS permanently and immediately
+      ansible.posix.firewalld:
         service: "{{ item }}"
         permanent: true
+        immediate: true
         state: enabled
       loop:
         - http
