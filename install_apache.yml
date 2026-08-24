@@ -6,7 +6,8 @@
     - name: Install httpd package
       ansible.builtin.dnf:
         name: httpd
-        state: present
+        state: latest
+        update_cache: yes
       when: ansible_distribution == "Redhat"
 
     - name: Start and enable httpd service
