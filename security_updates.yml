@@ -1,6 +1,6 @@
 ---
 - name: Apply RHEL 10 Security Updates
-  hosts: rhel10_hosts
+  hosts: all
   become: true
   tasks:
     - name: Refresh subscription and metadata, then install security updates
