@@ -12,7 +12,8 @@
         
     - name: add ssh key for simone
       tags: always
-        authorized_key: simone
+        authorized_key:
+        user: simone
         key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDCLbA77xYXyJzTOANhfyjaQeytavBREcZtI5mZoFnRr ansible"
 
     - name: add sudoers file for simone
