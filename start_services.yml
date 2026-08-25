@@ -3,18 +3,18 @@
 - hosts: all
   become: yes
   tasks:
-    - name: Install apache package
+    - name: change e-mail address for admin
       tags: apache
-      package:
-        name:
-          - "{{ apache_package }}"
-        state: latest
-        update_cache: yes
-
-    - name: Start and enable httpd service
+      lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^ServerAdmin'
+        line: ServerAdmin john.kim@pacxa.com
+      when: ansible_distribution == "RedHat"
+      register: varstate
+        
+    - name: restart httpd
       tags: apache
       service:
         name: httpd
-        state: started
-        enabled: yes
-      when: ansible_distribution == "RedHat"
+        state: restarted
+      when: varstate.changed
