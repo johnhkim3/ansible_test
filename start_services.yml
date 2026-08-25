@@ -1,0 +1,20 @@
+---
+
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install apache package
+      tags: apache
+      package:
+        name:
+          - "{{ apache_package }}"
+        state: latest
+        update_cache: yes
+
+    - name: Start and enable httpd service
+      tags: apache
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+      when: ansible_distribution == "RedHat"
