@@ -28,6 +28,6 @@
   lineinfile:
     path: /etc/httpd/conf/httpd.conf
     regexp: '^ServerAdmin'
-    line: ServerAdmin john.kim@pacxa.com
+    line: ServerAdmin user@pacxa.com
   when: ansible_distribution == "RedHat"
   notify: restart_apache
