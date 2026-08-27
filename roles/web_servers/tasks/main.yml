@@ -30,11 +30,4 @@
     regexp: '^ServerAdmin'
     line: ServerAdmin john.kim@pacxa.com
   when: ansible_distribution == "RedHat"
-  register: varstate
-        
-- name: restart httpd
-  tags: apache
-  service:
-    name: "{{ apache_service }}"
-    state: restarted
-  when: varstate.changed
+  notify: restart_apache
