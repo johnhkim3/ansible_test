@@ -1,0 +1,9 @@
+---
+- name: Remove tmux
+  hosts: all
+  become: true
+  tasks:
+    - name: Ensure tmux is uninstalled
+      ansible.builtin.package:
+        name: tmux
+        state: absent
