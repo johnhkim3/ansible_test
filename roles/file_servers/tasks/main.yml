@@ -1,0 +1,5 @@
+- name: Ensure tmux is installed
+    tags: tmux
+    package:
+      name: tmux
+      state: present
