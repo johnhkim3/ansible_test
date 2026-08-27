@@ -19,3 +19,19 @@
     state: enabled
     permanent: true
     immediate: true
+
+- name: change e-mail address for admin
+  tags: apache
+  lineinfile:
+    path: /etc/httpd/conf/httpd.conf
+    regexp: '^ServerAdmin'
+    line: ServerAdmin john.kim@pacxa.com
+  when: ansible_distribution == "RedHat"
+  register: varstate
+        
+- name: restart httpd
+  tags: apache
+  service:
+    name: httpd
+    state: restarted
+  when: varstate.changed
