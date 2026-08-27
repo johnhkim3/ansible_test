@@ -1,5 +1,21 @@
-- name: Ensure tmux is installed
-  tags: tmux
-  package:
-      name: tmux
-      state: latest
+- name: Install httpd package
+  tags: apache
+  dnf:
+    name:
+      - httpd
+    state: latest
+
+- name: Start and enable httpd service
+  tags: apache
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+
+- name: Enable http service in firewalld
+  tags: apache
+  ansible.posix.firewalld:
+    service: http
+    state: enabled
+    permanent: true
+    immediate: true
