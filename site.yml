@@ -15,12 +15,12 @@
   roles:
     - base
 
-- hosts: web_servers
-  become: true
-  roles:
-    - web_servers
-
 - hosts: file_servers
   become: true
   roles:
     - file_servers
+
+- hosts: web_servers
+  become: true
+  roles:
+    - web_servers
