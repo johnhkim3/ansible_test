@@ -15,7 +15,7 @@
 - name: Enable http service in firewalld
   tags: apache
   ansible.posix.firewalld:
-    service: http
+    service: "{{ apache_service }}"
     state: enabled
     permanent: true
     immediate: true
