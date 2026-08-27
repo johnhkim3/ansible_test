@@ -20,11 +20,6 @@
   roles:
     - web_servers
 
-- hosts: db_servers
-  become: true
-  roles:
-    - db_servers
-
 - hosts: file_servers
   become: true
   roles:
