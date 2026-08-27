@@ -22,7 +22,6 @@
   loop:
     - http
     - https
-  notify: Reload firewall
 
 - name: change e-mail address for admin
   tags: apache
