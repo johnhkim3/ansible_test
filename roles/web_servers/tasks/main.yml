@@ -12,13 +12,17 @@
     state: started
     enabled: yes
 
-- name: Enable http service in firewalld
+- name: Allow HTTP and HTTPS permanently and immediately
+  tags: apache
   ansible.posix.firewalld:
-    service: http
-    state: enabled
+    service: "{{ item }}"
     permanent: true
     immediate: true
-  when: ansible_distribution == "Redhat"
+    state: enabled
+  loop:
+    - http
+    - https
+  notify: Reload firewall
 
 - name: change e-mail address for admin
   tags: apache
