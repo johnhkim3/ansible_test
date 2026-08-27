@@ -1,8 +1,8 @@
 ---
 
 - hosts: all
-- become: true
-
+  become: true
+  pre_tasks:
   - name: update repository index (Redhat)
     tags: always
     dnf:
