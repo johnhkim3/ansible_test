@@ -2,13 +2,13 @@
   tags: apache
   dnf:
     name:
-      - httpd
+      - "{{ apache_package_name }}"
     state: latest
 
 - name: Start and enable httpd service
   tags: apache
   service:
-    name: httpd
+    name: "{{ apache_service }}"
     state: started
     enabled: yes
 
@@ -32,6 +32,6 @@
 - name: restart httpd
   tags: apache
   service:
-    name: httpd
+    name: "{{ apache_service }}"
     state: restarted
   when: varstate.changed
