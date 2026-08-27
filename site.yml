@@ -1,0 +1,10 @@
+---
+
+- hosts: all
+- become: true
+
+  - name: update repository index (Redhat)
+    tags: always
+    dnf:
+      update_cache: yes
+    changed_when: false
