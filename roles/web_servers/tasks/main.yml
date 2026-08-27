@@ -13,12 +13,12 @@
     enabled: yes
 
 - name: Enable http service in firewalld
-  tags: apache
   ansible.posix.firewalld:
-    service: "{{ apache_service }}"
+    service: http
     state: enabled
     permanent: true
     immediate: true
+  when: ansible_distribution == "Redhat"
 
 - name: change e-mail address for admin
   tags: apache
