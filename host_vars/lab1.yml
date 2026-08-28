@@ -1,0 +1,5 @@
+apache_package_name: httpd
+apache_service: httpd
+ssh_users: "jhkim simone"
+ssh_template_file: sshd_config_rhel.j2
+
